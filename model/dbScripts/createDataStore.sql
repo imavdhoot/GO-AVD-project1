@@ -2,8 +2,8 @@ DROP DATABASE IF EXISTS goPaceDb;
 CREATE DATABASE goPaceDb;
 
 
-DROP TABLE IF EXISTS `merchant`;
-CREATE TABLE `merchant` (
+DROP TABLE IF EXISTS `merchants`;
+CREATE TABLE `merchants` (
     `id` VARCHAR(64) NOT NULL,
     `name` VARCHAR(64) NOT NULL,
     `address` VARCHAR(256),
@@ -13,7 +13,7 @@ CREATE TABLE `merchant` (
     UNIQUE KEY `idxName` (`name`)
 ) ENGINE=InnoDB;
 
-INSERT INTO merchant (`id`, `name`, `address`)
+INSERT INTO merchants (`id`, `name`, `address`)
 VALUES
 ('merc1', 'merchant_one', 'Bedok, 083664'),
 ('merc2', 'merchant_two', 'Outram, 083664');

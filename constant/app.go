@@ -9,4 +9,7 @@ const (
 	AbortSignal            = "############### GOT %s SIGNAL. ABORTING.. ###############"
 	DBConnectionSuccess    = "SUCCESSFULLY CONNECTED TO DATABASE: "
 	DBConnectionFail       = "FAILED TO CONNECT TO DATABASE: "
+
+	StatusOK  = 0
+	StatusErr = 1
 )
