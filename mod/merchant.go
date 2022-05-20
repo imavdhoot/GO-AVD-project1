@@ -89,6 +89,16 @@ func UpdateMerchant(ctx *gin.Context) {
 		return
 	}
 
+	_, getErr := model.FetchMerchant(merchantId)
+	if getErr != nil {
+		log.Println("[UpdateMerchant] error in getting merchant:: ", getErr)
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"status": constant.StatusErr,
+			"error":  getErr.Error(),
+		})
+		return
+	}
+
 	_, updateErr := model.UpdateMerchant(merchantId, merchant)
 	if updateErr != nil {
 		log.Println("[UpdateMerchant] error in updating merchant:: ", updateErr)
@@ -107,8 +117,6 @@ func UpdateMerchant(ctx *gin.Context) {
 }
 
 func GetMerchant(ctx *gin.Context) {
-
-	//var merchant model.Merchant
 
 	merchantId := ctx.Param("id")
 	if merchantId == "" {
@@ -156,6 +164,16 @@ func DeleteMerchant(ctx *gin.Context) {
 	}
 
 	log.Printf("[DeleteMerchant] merchantId:: %s", merchantId)
+
+	_, getErr := model.FetchMerchant(merchantId)
+	if getErr != nil {
+		log.Println("[DeleteMerchant] error in getting merchant:: ", getErr)
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"status": constant.StatusErr,
+			"error":  getErr.Error(),
+		})
+		return
+	}
 
 	DeleteRes, DeleteErr := model.DeleteMerchant(merchantId)
 	if DeleteErr != nil {
