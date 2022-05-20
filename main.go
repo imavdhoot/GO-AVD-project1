@@ -9,7 +9,7 @@ import (
 	"os"
 )
 
-import "github.com/imavdhoot/GO-AVD-project1/mod"
+import "github.com/imavdhoot/GO-AVD-project1/controller"
 
 func defualtAPI(c *gin.Context) {
 	c.JSON(200, gin.H{
@@ -32,17 +32,17 @@ func main() {
 	r.Use(gin.Recovery())
 
 	r.GET("/ping", defualtAPI)
-	r.GET("/merchant/:id", mod.GetMerchant)
-	r.POST("/merchant/add", mod.AddMerchant)
-	r.PUT("/merchant/:id", mod.UpdateMerchant)
-	r.DELETE("/merchant/:id", mod.DeleteMerchant)
+	r.GET("/merchant/:id", controller.GetMerchant)
+	r.POST("/merchant/add", controller.AddMerchant)
+	r.PUT("/merchant/:id", controller.UpdateMerchant)
+	r.DELETE("/merchant/:id", controller.DeleteMerchant)
 
-	r.GET("/member/:id", mod.GetMember)
-	r.POST("/member/add", mod.AddMember)
-	r.PUT("/member/:id", mod.UpdateMember)
-	r.DELETE("/member/:id", mod.DeleteMember)
+	r.GET("/member/:id", controller.GetMember)
+	r.POST("/member/add", controller.AddMember)
+	r.PUT("/member/:id", controller.UpdateMember)
+	r.DELETE("/member/:id", controller.DeleteMember)
 
-	r.GET("/members/list/:merchantId", mod.GetMember)
+	r.GET("/members/list/:merchantId", controller.GetMember)
 
 	fmt.Println(constant.SeverStarted)
 	model.InitDB()
