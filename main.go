@@ -37,6 +37,13 @@ func main() {
 	r.PUT("/merchant/:id", mod.UpdateMerchant)
 	r.DELETE("/merchant/:id", mod.DeleteMerchant)
 
+	r.GET("/member/:id", mod.GetMember)
+	r.POST("/member/add", mod.AddMember)
+	r.PUT("/member/:id", mod.UpdateMember)
+	r.DELETE("/member/:id", mod.DeleteMember)
+
+	r.GET("/members/list/:merchantId", mod.GetMember)
+
 	fmt.Println(constant.SeverStarted)
 	model.InitDB()
 	r.Run(":9091") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")

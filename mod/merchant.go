@@ -47,11 +47,11 @@ func AddMerchant(ctx *gin.Context) {
 	}
 
 	ctx.JSON(http.StatusOK, gin.H{
-		"status":       constant.StatusOK,
-		"merchantCode": merchantId,
-		"name":         merchant.Name,
-		"address":      merchant.Address,
-		"message":      "merchant added successfully",
+		"status":     constant.StatusOK,
+		"merchantId": merchantId,
+		"name":       merchant.Name,
+		"address":    merchant.Address,
+		"message":    "merchant added successfully",
 	})
 }
 
@@ -110,9 +110,9 @@ func UpdateMerchant(ctx *gin.Context) {
 	}
 
 	ctx.JSON(http.StatusOK, gin.H{
-		"status":       constant.StatusOK,
-		"merchantCode": merchantId,
-		"message":      "merchant updated successfully",
+		"status":     constant.StatusOK,
+		"merchantId": merchantId,
+		"message":    "merchant updated successfully",
 	})
 }
 
@@ -143,11 +143,11 @@ func GetMerchant(ctx *gin.Context) {
 	log.Printf("[GetMerchant] merchant:: %+v", getRes)
 
 	ctx.JSON(http.StatusOK, gin.H{
-		"status":       constant.StatusOK,
-		"merchantCode": getRes.ID,
-		"name":         getRes.Name,
-		"address":      getRes.Address,
-		"message":      "merchant fetched successfully",
+		"status":     constant.StatusOK,
+		"merchantId": getRes.ID,
+		"name":       getRes.Name,
+		"address":    getRes.Address,
+		"message":    "merchant fetched successfully",
 	})
 }
 
@@ -188,8 +188,8 @@ func DeleteMerchant(ctx *gin.Context) {
 	log.Printf("[DeleteMerchant] merchantId:: %+v", DeleteRes)
 
 	ctx.JSON(http.StatusOK, gin.H{
-		"status":       constant.StatusOK,
-		"merchantCode": DeleteRes,
-		"message":      "merchant deleted successfully",
+		"status":     constant.StatusOK,
+		"merchantId": DeleteRes,
+		"message":    "merchant deleted successfully",
 	})
 }

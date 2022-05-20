@@ -2,16 +2,15 @@ package model
 
 import (
 	"log"
-	"time"
 )
 
-type Merchants struct {
-	ID        string    `gorm:"primaryKey;column:id"`
-	Name      string    `gorm:"unique;column:name"`
-	Address   string    `gorm:"column:address"`
-	CreatedAt time.Time `gorm:"column:created_at"`
-	UpdatedAt time.Time `gorm:"column:updated_at"`
-}
+//type Merchants struct {
+//	ID        string    `gorm:"primaryKey;column:id"`
+//	Name      string    `gorm:"unique;column:name"`
+//	Address   string    `gorm:"column:address"`
+//	CreatedAt time.Time `gorm:"column:created_at"`
+//	UpdatedAt time.Time `gorm:"column:updated_at"`
+//}
 
 type NewMerchantReq struct {
 	Name    string `json:"name" validate:"min=3,max=64,regexp=^[a-zA-Z0-9_ ]*$"`
