@@ -32,7 +32,11 @@ func main() {
 	r.Use(gin.Recovery())
 
 	r.GET("/ping", defualtAPI)
+	r.GET("/merchant/:id", mod.GetMerchant)
 	r.POST("/merchant/add", mod.AddMerchant)
+	r.PUT("/merchant/:id", mod.UpdateMerchant)
+	r.DELETE("/merchant/:id", mod.DeleteMerchant)
+
 	fmt.Println(constant.SeverStarted)
 	model.InitDB()
 	r.Run(":9091") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")

@@ -18,6 +18,10 @@ type NewMerchantReq struct {
 	Address string `json:"address" validate:"min=6,max=256,regexp=^[a-zA-Z0-9_ \\,]*$"`
 }
 
+type UpdateMerchantReq struct {
+	Address string `json:"address" validate:"min=6,max=256,regexp=^[a-zA-Z0-9_ \\,]*$"`
+}
+
 type Merchant struct {
 	ID      string `gorm:"primaryKey;column:id"`
 	Name    string `gorm:"unique;column:name"`
@@ -29,9 +33,51 @@ func CreateMerchant(id string, newMerc NewMerchantReq) (string, error) {
 
 	result := goDB.Select("ID", "Name", "Address").Create(&merc)
 
-	log.Printf(">>>>>>>>>>>>> %+v", result)
+	log.Printf("[CreateMerchant] Result:: %+v", result)
+
 	if result.Error != nil {
 		log.Printf("[CreateMerchant] Error:: %s", result.Error)
+	}
+
+	return id, result.Error
+}
+
+func UpdateMerchant(id string, newMerc UpdateMerchantReq) (string, error) {
+	merc := Merchant{ID: id}
+
+	result := goDB.Model(&merc).Select("Address").Updates(Merchant{Address: newMerc.Address})
+
+	log.Printf("[UpdateMerchant] Result:: %+v", result)
+	if result.Error != nil {
+		log.Printf("[UpdateMerchant] Error:: %s", result.Error)
+	}
+
+	return id, result.Error
+}
+
+func FetchMerchant(id string) (Merchant, error) {
+	merc := Merchant{ID: id}
+
+	result := goDB.First(&merc)
+
+	log.Printf("[FetchMerchant] merc:: %+v", merc)
+	log.Printf("[FetchMerchant] Result:: %+v", result)
+	if result.Error != nil {
+		log.Printf("[FetchMerchant] Error:: %s", result.Error)
+	}
+
+	return merc, result.Error
+}
+
+func DeleteMerchant(id string) (string, error) {
+	merc := Merchant{ID: id}
+
+	result := goDB.Delete(&merc)
+
+	log.Printf("[DeleteMerchant] merc:: %+v", merc)
+	log.Printf("[DeleteMerchant] Result:: %+v", result)
+	if result.Error != nil {
+		log.Printf("[DeleteMerchant] Error:: %s", result.Error)
 	}
 
 	return id, result.Error
