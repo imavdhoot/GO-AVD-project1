@@ -73,7 +73,7 @@ func AddMember(ctx *gin.Context) {
 		"name":       member.Name,
 		"email":      member.Email,
 		"merchantId": member.MerchantId,
-		"message":    "Member added successfully",
+		"message":    "member added successfully",
 	})
 }
 
@@ -134,7 +134,7 @@ func UpdateMember(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{
 		"status":   constant.StatusOK,
 		"memberId": memberId,
-		"message":  "Member updated successfully",
+		"message":  "member updated successfully",
 	})
 }
 
@@ -170,7 +170,7 @@ func GetMember(ctx *gin.Context) {
 		"name":       getRes.Name,
 		"email":      getRes.Email,
 		"merchantId": getRes.MerchantId,
-		"message":    "Member fetched successfully",
+		"message":    "member fetched successfully",
 	})
 }
 
@@ -256,7 +256,7 @@ func MemberListByMerchant(ctx *gin.Context) {
 
 	ctx.JSON(http.StatusOK, gin.H{
 		"status":   constant.StatusOK,
-		"message":  "Member fetched successfully",
+		"message":  "members fetched successfully",
 		"page":     pageNo,
 		"pageSize": constant.PageSize,
 		"count":    len(membRes),
