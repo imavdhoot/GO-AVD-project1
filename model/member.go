@@ -1,6 +1,7 @@
 package model
 
 import (
+	"github.com/imavdhoot/GO-AVD-project1/constant"
 	"log"
 )
 
@@ -15,10 +16,10 @@ type UpdateMemberReq struct {
 }
 
 type Member struct {
-	ID         int    `gorm:"primaryKey;column:id"`
-	Name       string `gorm:"column:name"`
-	Email      string `gorm:"unique;column:email"`
-	MerchantId string `gorm:"column:merchant_id"`
+	ID         int    `json:"id" gorm:"primaryKey;column:id"`
+	Name       string `json:"name" gorm:"column:name"`
+	Email      string `json:"email" gorm:"unique;column:email"`
+	MerchantId string `json:"merchantId" gorm:"column:merchant_id"`
 }
 
 func CreateMember(newMemb NewMemberReq) (Member, error) {
@@ -75,4 +76,23 @@ func DeleteMember(id int) (int, error) {
 	}
 
 	return id, result.Error
+}
+
+func MemberListByMerchant(merchantId string, pageNo int) ([]Member, error) {
+	var membs []Member
+
+	offset := (pageNo - 1) * constant.PageSize
+
+	log.Printf("[MemberListByMerchant] offset:: %d", offset)
+
+	result := goDB.Raw("SELECT * FROM members WHERE merchant_id = ? LIMIT ?, ?",
+		merchantId, offset, constant.PageSize).Scan(&membs)
+
+	log.Printf("[MemberListByMerchant] Member:: %+v", membs)
+	log.Printf("[MemberListByMerchant] Result:: %+v", result)
+	if result.Error != nil {
+		log.Printf("[MemberListByMerchant] Error:: %s", result.Error)
+	}
+
+	return membs, result.Error
 }

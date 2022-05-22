@@ -61,7 +61,7 @@ func UpdateMerchant(ctx *gin.Context) {
 
 	merchantId := ctx.Param("id")
 	if merchantId == "" {
-		log.Println("[UpdateMerchant] invalid/empty merchantId for update:: ")
+		log.Println("[UpdateMerchant] invalid/empty merchantId for update:: ", merchantId)
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"status": constant.StatusErr,
 			"error":  constant.ErrMerchantIdInvalid.Error(),

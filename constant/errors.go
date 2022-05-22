@@ -12,4 +12,6 @@ var (
 	ErrMerchantIdInvalid    = errors.New("invalid/empty merchant ID for update")
 	ErrMemberIdInvalid      = errors.New("invalid/empty merchant ID for update")
 	ErrInvalidEmailAddress  = errors.New("invalid email address")
+	ErrMerchantIdEmpty      = errors.New("invalid/empty merchant ID")
+	ErrInvalidPageNo        = errors.New("invalid page number in query")
 )

@@ -83,7 +83,7 @@ func UpdateMember(ctx *gin.Context) {
 
 	memberId, memberIdErr := strconv.Atoi(ctx.Param("id"))
 	if memberIdErr != nil {
-		log.Println("[UpdateMember] invalid/empty memberId for update:: ")
+		log.Println("[UpdateMember] invalid/empty memberId for update:: ", memberId)
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"status": constant.StatusErr,
 			"error":  constant.ErrMemberIdInvalid.Error(),
@@ -142,7 +142,7 @@ func GetMember(ctx *gin.Context) {
 
 	memberId, memberIdErr := strconv.Atoi(ctx.Param("id"))
 	if memberIdErr != nil {
-		log.Println("[GetMember] invalid/empty memberId for update:: ")
+		log.Println("[GetMember] invalid/empty memberId for update:: ", memberId)
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"status": constant.StatusErr,
 			"error":  constant.ErrMemberIdInvalid.Error(),
@@ -214,5 +214,52 @@ func DeleteMember(ctx *gin.Context) {
 		"status":   constant.StatusOK,
 		"memberId": DeleteRes,
 		"message":  "Member deleted successfully",
+	})
+}
+
+func MemberListByMerchant(ctx *gin.Context) {
+	merchantId := ctx.Param("merchantId")
+	if merchantId == "" {
+		log.Println("[MemberListByMerchant] invalid/empty merchantId:: ", merchantId)
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"status": constant.StatusErr,
+			"error":  constant.ErrMerchantIdEmpty.Error(),
+		})
+		return
+	}
+
+	pageNo, pageNoErr := strconv.Atoi(ctx.Query("page"))
+	if pageNoErr != nil {
+		log.Println("[MemberListByMerchant] invalid/empty pageNo:: ", pageNoErr)
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"status": constant.StatusErr,
+			"error":  constant.ErrInvalidPageNo.Error(),
+		})
+		return
+	}
+	if pageNo < 1 {
+		pageNo = 1
+	}
+
+	log.Printf("[MemberListByMerchant] merchantId:: %s", merchantId)
+	membRes, membErr := model.MemberListByMerchant(merchantId, pageNo)
+	if membErr != nil {
+		log.Println("[MemberListByMerchant] error in getting Members:: ", membErr)
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"status": constant.StatusErr,
+			"error":  membErr.Error(),
+		})
+		return
+	}
+
+	log.Printf("[MemberListByMerchant] Members:: %+v", membRes)
+
+	ctx.JSON(http.StatusOK, gin.H{
+		"status":   constant.StatusOK,
+		"message":  "Member fetched successfully",
+		"page":     pageNo,
+		"pageSize": constant.PageSize,
+		"count":    len(membRes),
+		"members":  membRes,
 	})
 }

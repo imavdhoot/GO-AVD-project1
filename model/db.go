@@ -50,6 +50,7 @@ func InitDB() {
 		return
 	}
 	//defer DB.Close()
+	log.Printf("[DB] %s", constant.DBConnectionSuccess)
 
 	DB.SetMaxOpenConns(100)
 	DB.SetMaxIdleConns(10)
@@ -59,7 +60,7 @@ func InitDB() {
 	defer cancelfunc()
 	err = DB.PingContext(ctx)
 	if err != nil {
-		log.Printf("[DB]Errors pinging DB:: %s", err)
+		log.Printf("[DB]%s :: %s", err, constant.DBConnectionFail)
 		return
 	}
 
@@ -73,5 +74,5 @@ func InitDB() {
 	}
 
 	goDB = gormDB
-	log.Printf("########### [DB]Connected to %s successfully ###########", constant.DB_database)
+	log.Printf("######### %s %s #########", constant.DBConnectionSuccess, constant.DB_database)
 }

@@ -42,7 +42,7 @@ func main() {
 	r.PUT("/member/:id", controller.UpdateMember)
 	r.DELETE("/member/:id", controller.DeleteMember)
 
-	r.GET("/members/list/:merchantId", controller.GetMember)
+	r.GET("/members/list/:merchantId", controller.MemberListByMerchant)
 
 	fmt.Println(constant.SeverStarted)
 	model.InitDB()

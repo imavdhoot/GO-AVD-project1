@@ -1,13 +1,13 @@
 [GIN-debug] GET    /ping                     --> main.defualtAPI (4 handlers)
-[GIN-debug] GET    /merchant/:id             --> github.com/imavdhoot/GO-AVD-project1/mod.GetMerchant (4 handlers)
-[GIN-debug] POST   /merchant/add             --> github.com/imavdhoot/GO-AVD-project1/mod.AddMerchant (4 handlers)
-[GIN-debug] PUT    /merchant/:id             --> github.com/imavdhoot/GO-AVD-project1/mod.UpdateMerchant (4 handlers)
-[GIN-debug] DELETE /merchant/:id             --> github.com/imavdhoot/GO-AVD-project1/mod.DeleteMerchant (4 handlers)
-[GIN-debug] GET    /member/:id               --> github.com/imavdhoot/GO-AVD-project1/mod.GetMember (4 handlers)
-[GIN-debug] POST   /member/add               --> github.com/imavdhoot/GO-AVD-project1/mod.AddMember (4 handlers)
-[GIN-debug] PUT    /member/:id               --> github.com/imavdhoot/GO-AVD-project1/mod.UpdateMember (4 handlers)
-[GIN-debug] DELETE /member/:id               --> github.com/imavdhoot/GO-AVD-project1/mod.DeleteMember (4 handlers)
-[GIN-debug] GET    /members/list/:merchantId --> github.com/imavdhoot/GO-AVD-project1/mod.GetMember (4 handlers)
+[GIN-debug] GET    /merchant/:id             --> github.com/imavdhoot/GO-AVD-project1/controller.GetMerchant (4 handlers)
+[GIN-debug] POST   /merchant/add             --> github.com/imavdhoot/GO-AVD-project1/controller.AddMerchant (4 handlers)
+[GIN-debug] PUT    /merchant/:id             --> github.com/imavdhoot/GO-AVD-project1/controller.UpdateMerchant (4 handlers)
+[GIN-debug] DELETE /merchant/:id             --> github.com/imavdhoot/GO-AVD-project1/controller.DeleteMerchant (4 handlers)
+[GIN-debug] GET    /member/:id               --> github.com/imavdhoot/GO-AVD-project1/controller.GetMember (4 handlers)
+[GIN-debug] POST   /member/add               --> github.com/imavdhoot/GO-AVD-project1/controller.AddMember (4 handlers)
+[GIN-debug] PUT    /member/:id               --> github.com/imavdhoot/GO-AVD-project1/controller.UpdateMember (4 handlers)
+[GIN-debug] DELETE /member/:id               --> github.com/imavdhoot/GO-AVD-project1/controller.DeleteMember (4 handlers)
+[GIN-debug] GET    /members/list/:merchantId --> github.com/imavdhoot/GO-AVD-project1/controller.MemberListByMerchant (4 handlers)
 [GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
 Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
 [GIN-debug] Listening and serving HTTP on :9091

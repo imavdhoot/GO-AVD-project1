@@ -2,7 +2,7 @@ package constant
 
 const (
 
-	//app startup logs
+	// SeverStarted app startup logs
 	SeverStarted           = "########### SERVER STARTED ################"
 	StoppingServer         = "########### STOPPING SERVER ################"
 	SeverStoppedGracefully = "########### SERVER STOPPED GRACEFULLY ################"
@@ -12,4 +12,6 @@ const (
 
 	StatusOK  = 0
 	StatusErr = 1
+
+	PageSize = 4
 )
