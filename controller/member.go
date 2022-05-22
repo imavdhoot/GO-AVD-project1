@@ -35,7 +35,7 @@ func AddMember(ctx *gin.Context) {
 	}
 
 	if _, emailErr := mail.ParseAddress(member.Email); emailErr != nil {
-		log.Printf("[AddMember] Error validating email address:: %s error:: %s", member.Email, emailErr)
+		log.Printf("[AddMember] Error validating email:: %s error:: %s", member.Email, emailErr)
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"status": constant.StatusErr,
 			"error":  constant.ErrInvalidEmailAddress.Error(),
@@ -79,7 +79,7 @@ func AddMember(ctx *gin.Context) {
 
 func UpdateMember(ctx *gin.Context) {
 
-	var Member model.UpdateMemberReq
+	var member model.UpdateMemberReq
 
 	memberId, memberIdErr := strconv.Atoi(ctx.Param("id"))
 	if memberIdErr != nil {
@@ -91,7 +91,7 @@ func UpdateMember(ctx *gin.Context) {
 		return
 	}
 
-	if err := ctx.ShouldBindJSON(&Member); err != nil {
+	if err := ctx.ShouldBindJSON(&member); err != nil {
 		log.Println("[UpdateMember] error from json reading:: ", err)
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"status": constant.StatusErr,
@@ -99,14 +99,23 @@ func UpdateMember(ctx *gin.Context) {
 		})
 		return
 	}
-	log.Printf("[UpdateMember] memberId:: %s", memberId)
-	log.Printf("[UpdateMember] Member:: %+v\n", Member)
+	log.Printf("[UpdateMember] memberId:: %d", memberId)
+	log.Printf("[UpdateMember] Member:: %+v", member)
 
-	if validateErr := validator.Validate(Member); validateErr != nil {
+	if validateErr := validator.Validate(member); validateErr != nil {
 		log.Println("[UpdateMember] validateErr :: ", validateErr)
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"status": constant.StatusErr,
 			"error":  validateErr.Error(),
+		})
+		return
+	}
+
+	if _, emailErr := mail.ParseAddress(member.Email); emailErr != nil {
+		log.Printf("[UpdateMember] Error validating email:: %s error:: %s", member.Email, emailErr)
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"status": constant.StatusErr,
+			"error":  constant.ErrInvalidEmailAddress.Error(),
 		})
 		return
 	}
@@ -121,7 +130,7 @@ func UpdateMember(ctx *gin.Context) {
 		return
 	}
 
-	_, updateErr := model.UpdateMember(memberId, Member)
+	_, updateErr := model.UpdateMember(memberId, member)
 	if updateErr != nil {
 		log.Println("[UpdateMember] error in updating Member:: ", updateErr)
 		ctx.JSON(http.StatusBadRequest, gin.H{
@@ -231,13 +240,12 @@ func MemberListByMerchant(ctx *gin.Context) {
 	pageNo, pageNoErr := strconv.Atoi(ctx.Query("page"))
 	if pageNoErr != nil {
 		log.Println("[MemberListByMerchant] invalid/empty pageNo:: ", pageNoErr)
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"status": constant.StatusErr,
-			"error":  constant.ErrInvalidPageNo.Error(),
-		})
-		return
+		log.Printf("[MemberListByMerchant] Defaulting to pageNo:: %d", pageNo)
+		pageNo = 1
 	}
+
 	if pageNo < 1 {
+		log.Printf("[MemberListByMerchant] invalid pageNo:: %d. Defaulting to pageNo 1", pageNo)
 		pageNo = 1
 	}
 

@@ -12,7 +12,7 @@ type NewMemberReq struct {
 }
 
 type UpdateMemberReq struct {
-	Email string `json:"address" validate:"min=6,max=256,regexp=^[a-zA-Z0-9_ \\,]*$"`
+	Email string `json:"email" validate:"min=6,max=256,regexp=^[a-zA-Z0-9\\-._@]*$"`
 }
 
 type Member struct {
