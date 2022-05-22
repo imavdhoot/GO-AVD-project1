@@ -8,24 +8,13 @@
 - run this command `go get` to install all dependencies
 - install mysql on your local machine if not installed already
 - source `./model/dbScripts/createDataStore.sql` file to create database & populate it with sample data.
-- you can use POSTMAN for testing APIs. Refer [APIs section](###APIs) 
+- you can use POSTMAN for testing APIs. Refer [APIs section](#APIs) 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-### APIs (request and Responses):
+### APIs
 - for errorful request, status will be 1
 - for successful request status will be 0
 - below are some sample response for error request
