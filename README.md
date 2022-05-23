@@ -16,7 +16,7 @@ go get
 ```bash
 go run main.go
 ```
-- run the test cases with following command
+- For running the test cases, use following command
 ```bash
 go test -v
 ```
