@@ -7,7 +7,7 @@
 - cd to this repo
 - For installing all dependencies, use following command in terminal
 ```bash
-go get
+go install
 ```
 - install mysql on your local machine if not installed already
 - source file or execute queries from file `./model/dbScripts/createDataStore.sql` to create database & populate it with sample data.
@@ -18,7 +18,7 @@ go run main.go
 ```
 - For running the test cases, use following command
 ```bash
-go test -v
+go test ./...
 ```
 
 

@@ -159,7 +159,7 @@ func GetMember(ctx *gin.Context) {
 		return
 	}
 
-	log.Printf("[GetMember] memberId:: %s", memberId)
+	log.Printf("[GetMember] memberId:: %d", memberId)
 
 	getRes, getErr := model.FetchMember(memberId)
 	if getErr != nil {
@@ -195,7 +195,7 @@ func DeleteMember(ctx *gin.Context) {
 		return
 	}
 
-	log.Printf("[DeleteMember] memberId:: %s", memberId)
+	log.Printf("[DeleteMember] memberId:: %d", memberId)
 
 	_, getErr := model.FetchMember(memberId)
 	if getErr != nil {
@@ -240,8 +240,8 @@ func MemberListByMerchant(ctx *gin.Context) {
 	pageNo, pageNoErr := strconv.Atoi(ctx.Query("page"))
 	if pageNoErr != nil {
 		log.Println("[MemberListByMerchant] invalid/empty pageNo:: ", pageNoErr)
-		log.Printf("[MemberListByMerchant] Defaulting to pageNo:: %d", pageNo)
 		pageNo = 1
+		log.Printf("[MemberListByMerchant] Defaulting to pageNo:: %d", pageNo)
 	}
 
 	if pageNo < 1 {
