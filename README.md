@@ -5,7 +5,7 @@
 ### SETUP
 - clone this repo
 - cd to this repo
-- run this command in terminal to install all dependencies
+- For installing all dependencies, use following command in terminal
 ```bash
 go get
 ```
