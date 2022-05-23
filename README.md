@@ -12,6 +12,14 @@ go get
 - install mysql on your local machine if not installed already
 - source file or execute queries from file `./model/dbScripts/createDataStore.sql` to create database & populate it with sample data.
 - you can use POSTMAN for testing APIs. Refer [APIs section](#APIs) 
+- run this command in terminal to start the server
+```bash
+go run main.go
+```
+- run the test cases with following command
+```bash
+go test -v
+```
 
 
 <br/>
